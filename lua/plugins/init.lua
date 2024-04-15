@@ -8,18 +8,24 @@ return {{
 {
     "neovim/nvim-lspconfig",
     config = function()
+        local lsp_zero = require('lsp-zero')
+        lsp_zero.extend_lspconfig()
         require("nvchad.configs.lspconfig").defaults()
         require "configs.lspconfig"
     end
 }, {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v3.x'
+}, {
     "williamboman/mason.nvim",
     opts = {
-        ensure_installed = {"lua-language-server", "stylua", "html-lsp", "css-lsp", "prettier", "rust-analyzer"}
+        ensure_installed = {"lua-language-server", "stylua", "html-lsp", "css-lsp", "prettier", "rust-analyzer",
+                            "typescript-language-server", "tailwindcss-language-server"}
     }
 }, {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-        ensure_installed = {"vim", "lua", "vimdoc", "html", "css", "rust"}
+        ensure_installed = {"vim", "lua", "vimdoc", "html", "css", "rust", "typescript"}
     }
 }, {
     'mrcjkb/rustaceanvim',
@@ -56,5 +62,34 @@ return {{
                 types = true
             }
         })
+    end
+}, {
+    'akinsho/flutter-tools.nvim',
+    lazy = false,
+    dependencies = {'nvim-lua/plenary.nvim', 'stevearc/dressing.nvim' -- optional for vim.ui.select
+    },
+    config = function()
+        require("flutter-tools").setup {
+            debugger = {
+                enabled = true,
+                run_via_dap = true,
+                exception_breakpoints = {},
+                register_configurations = function(paths)
+                    require("dap").configurations.dart =
+                        { -- For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+                        {
+                            name = "Debug Android",
+                            request = "launch",
+                            type = "dart",
+                            args = {"--flavor", "android", "--target", "lib/main_dev.dart"}
+                        }, {
+                            name = "Debug iOS",
+                            request = "launch",
+                            type = "dart",
+                            args = {"--target", "lib/main_dev.dart"}
+                        }}
+                end
+            }
+        }
     end
 }}
