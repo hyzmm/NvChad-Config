@@ -30,3 +30,12 @@ lspconfig.tsserver.setup {
     on_init = on_init,
     capabilities = capabilities
 }
+
+lspconfig.rust_analyzer.setup({
+    on_attach = function(client, bufnr)
+        vim.lsp.inlay_hint.enable(bufnr)
+        on_attach(client, bufnr)
+    end,
+    on_init = on_init,
+    capabilities = capabilities
+})
