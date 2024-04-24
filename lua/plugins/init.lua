@@ -31,13 +31,14 @@ return {
         "rust-analyzer",
         "typescript-language-server",
         "tailwindcss-language-server",
+        "taplo",
       },
     },
   },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      ensure_installed = { "vim", "lua", "vimdoc", "html", "css", "rust", "typescript" },
+      ensure_installed = { "toml", "vim", "lua", "vimdoc", "html", "css", "rust", "typescript" },
       highlight = { enable = true },
       incremental_selection = {
         enable = true,
