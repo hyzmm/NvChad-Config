@@ -126,4 +126,17 @@ return {
       overseer.open { direction = "bottom" }
     end,
   },
+  {
+    "Pocco81/auto-save.nvim",
+    lazy = false,
+    config = function()
+      require("auto-save").setup {}
+    end,
+  },
+  {
+    "nvim-telescope/telescope-media-files.nvim",
+    config = function()
+      require("telescope").load_extension "media_files"
+    end,
+  },
 }

@@ -111,3 +111,12 @@ map("n", "<Leader>ds", function()
   local widgets = require "dap.ui.widgets"
   widgets.centered_float(widgets.scopes)
 end)
+
+-- Telescope
+local builtin = require "telescope.builtin"
+map("n", "<Leader>fs", function()
+  builtin.lsp_document_symbols()
+end)
+map("n", "<Leader>fS", function()
+  builtin.lsp_workspace_symbols()
+end)
